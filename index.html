@@ -1,225 +1,136 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Madina siz uchun Maxsus Sovg'a 💖</title>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      background: black;
-      color: white;
-    }
-
-    /* STAR CANVAS */
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
-    .center {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .box {
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
-      padding: 25px;
-      border-radius: 20px;
-      max-width: 520px;
-      width: 100%;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
-    }
-
-    input {
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      text-align: center;
-      margin-top: 10px;
-      width: 80%;
-    }
-
-    button {
-      margin-top: 15px;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .hidden { display: none; }
-
-    .bigText {
-      font-size: 18px;
-      line-height: 1.6;
-      animation: fade 2s ease-in;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .loveModal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 5;
-      padding: 20px;
-    }
-
-    .modalBox {
-      background: white;
-      color: black;
-      padding: 20px;
-      border-radius: 15px;
-      max-width: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-      animation: fade 0.5s;
-    }
-
-    .floatNum {
-      position: absolute;
-      font-size: 18px;
-      opacity: 0.7;
-      animation: floatUp 5s linear forwards;
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-200px); opacity: 0; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Madina uchun 💖</title>
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:black;
+  overflow:hidden;
+  color:white;
+  text-align:center;
+}
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+.screen {
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:2;
+}
+.card {
+  background: rgba(255,255,255,0.08);
+  padding:20px;
+  border-radius:20px;
+  backdrop-filter: blur(10px);
+  max-width:90%;
+}
+button {
+  padding:10px 20px;
+  border:none;
+  border-radius:12px;
+  margin-top:10px;
+  cursor:pointer;
+}
+.hidden{display:none;}
+</style>
 </head>
 <body>
-
 <canvas id="stars"></canvas>
 
-<!-- LOGIN -->
-<div class="center" id="login">
-  <div class="box">
-    <h2>🔒 Hurmatli Madina uchun kirish</h2>
-    <p>Siz uchun maxsus parol qo‘yilgan</p>
-    <input type="password" id="pass" placeholder="Parolni kiriting">
+<!-- PASSWORD SCREEN -->
+<div id="login" class="screen">
+  <div class="card">
+    <h2>🔒 Parolni kiriting</h2>
+    <input id="pass" type="password" placeholder="Parol..." />
     <br>
-    <button onclick="check()">Kirish</button>
+    <button onclick="checkPass()">Kirish</button>
   </div>
 </div>
 
-<!-- MAIN -->
-<div class="center hidden" id="main">
-  <div class="box">
-    <h2>Hurmatli Madina 🌸</h2>
-    <p class="bigText" id="text"></p>
-
-    <button onclick="next1()">Davom etish 💖</button>
+<!-- INTRO -->
+<div id="intro" class="screen hidden">
+  <div class="card">
+    <h1>🌸 Assalomu alaykum Madina</h1>
+    <p>Siz juda ajoyib insonsiz 💖</p>
+    <p>Sizni hurmat qilaman va qadrlayman ✨</p>
+    <button onclick="showLove()">Davom etish 💖</button>
   </div>
 </div>
 
-<!-- LOVE 50 LANG -->
-<div class="loveModal" id="love">
-  <div class="modalBox">
-    <h3>❤️ Siz uchun ❤️</h3>
-    <p>
-      I love you (EN)<br>
-      Je t’aime (FR)<br>
-      Te amo (ES)<br>
-      Ich liebe dich (DE)<br>
-      Ti amo (IT)<br>
-      Aishiteru (JP)<br>
-      Saranghae (KR)<br>
-      Wo ai ni (CN)<br>
-      Eu te amo (PT)<br>
-      Ik hou van jou (NL)<br>
-      Kocham cię (PL)<br>
-      Я тебя люблю (RU)<br>
-      Ana behibek (AR)<br>
-      Szeretlek (HU)<br>
-      Te iubesc (RO)<br>
-      Jeg elsker deg (NO)<br>
-      Jeg elsker dig (DK)<br>
-      Volim te (HR)<br>
-      Miluji tě (CZ)<br>
-      Mahal kita (PH)<br>
-      Main tumse pyar karta hoon (IN)
-      <br>.. 💖
-    </p>
-    <button onclick="next2()">Davom etish ✨</button>
+<!-- LOVE LANGUAGES -->
+<div id="love" class="screen hidden">
+  <div class="card">
+    <h2>💌 50 tilda Sevgi</h2>
+    <p id="loveText">I love you</p>
+    <button onclick="nextFinal()">Davom etish 💫</button>
   </div>
 </div>
 
 <!-- FINAL -->
-<div class="loveModal" id="final">
-  <div class="modalBox">
-    <h2>💖 Sizga shaxsan</h2>
-    <p>Bu sovg‘a <b>Bunyodbek tomonidan</b> maxsus tayyorlandi 🌸</p>
+<div id="final" class="screen hidden">
+  <div class="card">
+    <h1>💖 Sizga maxsus</h1>
+    <p>Bunyodbek tomonidan 💫</p>
   </div>
 </div>
 
 <script>
-// PASSWORD
-function check(){
+const correctPassword = "madina123";
+
+function checkPass(){
   let p = document.getElementById('pass').value;
-  if(p === "madina1117"){
+  if(p === correctPassword){
     document.getElementById('login').classList.add('hidden');
-    document.getElementById('main').classList.remove('hidden');
-    typeText();
+    document.getElementById('intro').classList.remove('hidden');
   } else {
-    alert("Parol noto‘g‘ri ❌");
+    alert("Noto'g'ri parol 😢");
   }
 }
 
-// TYPE TEXT
-function typeText(){
-  let text = "Hurmatli Madina, siz juda ajoyib insonsiz va sizga har doim hurmat bilan murojaat qilinadi sizni borligingiz men uchun baxt sizni doim yaxshi koraman judayam qattiq sevaman siz blan doim birga bolishni istayman siz siz dunyo menga qorong'u sizni bu dunyoga keltirgan ota onaongiz yani meni dadam va oyimga katta raxmat Inshaaloh sizni ozim dunyodagi eng baxtli inson qilaman Hurmat bilan BUNYODBEK 💖";
-  let i = 0;
-  let el = document.getElementById("text");
-  let interval = setInterval(()=>{
-    el.innerHTML += text[i];
+function showLove(){
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('love').classList.remove('hidden');
+  startLove();
+}
+
+let loves = [
+"I love you","Je t'aime","Te amo","Ich liebe dich","Ti amo",
+"Aishiteru","Seni sevaman","Ana behibek","Volim te","Szeretlek"
+];
+let i=0;
+function startLove(){
+  setInterval(()=>{
+    document.getElementById('loveText').innerText = loves[i%loves.length];
     i++;
-    if(i>=text.length) clearInterval(interval);
-  },50);
+  },800);
 }
 
-// STEP 1
-function next1(){
-  document.getElementById('love').style.display='flex';
+function nextFinal(){
+  document.getElementById('love').classList.add('hidden');
+  document.getElementById('final').classList.remove('hidden');
 }
 
-// STEP 2
-function next2(){
-  document.getElementById('love').style.display='none';
-  document.getElementById('final').style.display='flex';
-}
-
-// STARS
+// stars
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let stars = [];
-for(let i=0;i<150;i++){
+for(let i=0;i<200;i++){
   stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
 }
 
@@ -230,24 +141,10 @@ function draw(){
     ctx.beginPath();
     ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
     ctx.fill();
-    s.y += 0.3;
-    if(s.y>canvas.height) s.y=0;
   });
   requestAnimationFrame(draw);
 }
 draw();
-
-// FLOAT NUMBERS
-setInterval(()=>{
-  let n = document.createElement("div");
-  n.className="floatNum";
-  n.innerText = Math.floor(Math.random()*999);
-  n.style.left = Math.random()*100+"vw";
-  n.style.top = "80vh";
-  document.body.appendChild(n);
-  setTimeout(()=>n.remove(),5000);
-},700);
 </script>
-
 </body>
 </html>
