@@ -3,187 +3,172 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Madina uchun 💖</title>
+<title>Madina uchun 💖 | Cinema Pro Max</title>
 <style>
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:black;
-  overflow:hidden;
-  color:white;
-  text-align:center;
+body{
+margin:0;
+font-family:Arial,sans-serif;
+overflow:hidden;
+color:white;
+text-align:center;
+background:linear-gradient(120deg,#000,#1a0025,#000);
+background-size:400% 400%;
+animation:bg 10s infinite;
 }
-canvas {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+@keyframes bg{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
-.screen {
-  position:absolute;
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:2;
+canvas{
+position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;
 }
-.card {
-  background: rgba(255,255,255,0.08);
-  padding:20px;
-  border-radius:20px;
-  backdrop-filter: blur(10px);
-  max-width:90%;
+.screen{
+position:absolute;width:100%;height:100%;display:flex;
+justify-content:center;align-items:center;flex-direction:column;
+z-index:2;
 }
-button {
-  padding:10px 20px;
-  border:none;
-  border-radius:12px;
-  margin-top:10px;
-  cursor:pointer;
+.card{
+background:rgba(255,255,255,0.08);
+padding:22px;border-radius:20px;
+backdrop-filter:blur(12px);
+max-width:90%;box-shadow:0 0 25px rgba(255,0,100,0.3);
 }
+input,button{
+padding:10px;border-radius:12px;border:none;margin-top:10px;
+}
+button{cursor:pointer;background:#ff3d7f;color:white;font-weight:bold}
 .hidden{display:none;}
+.title{
+font-size:28px;
+animation:fade 2s ease-in-out;
+}
+@keyframes fade{from{opacity:0}to{opacity:1}}
 </style>
 </head>
 <body>
-<canvas id="stars"></canvas>
 
-<!-- PASSWORD SCREEN -->
+<canvas id="canvas"></canvas>
+<audio id="music" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
+
+<!-- LOGIN -->
 <div id="login" class="screen">
-  <div class="card">
-    <h2>🔒 Parolni kiriting</h2>
-    <input id="pass" type="password" placeholder="Parol..." />
-    <br>
-    <button onclick="checkPass()">Kirish</button>
-  </div>
+<div class="card">
+<h2>🔒 Parol</h2>
+<input id="pass" type="password" placeholder="Parol..." />
+<br>
+<button onclick="check()">Kirish</button>
+</div>
 </div>
 
-<!-- INTRO -->
+<!-- CINEMATIC INTRO -->
 <div id="intro" class="screen hidden">
-  <div class="card">
-    <h1>🌸 Assalomu alaykum Madina</h1>
-    <p>Siz juda ajoyib insonsiz 💖</p>
-    <p>Sizni hurmat qilaman va qadrlayman ✨</p>
-    <button onclick="showLove()">Davom etish 💖</button>
-  </div>
+<div class="card">
+<h1 class="title">🌸 Madina uchun 💖</h1>
+<p id="typing"></p>
+<button onclick="next()">Davom etish 💫</button>
+</div>
 </div>
 
-<!-- LOVE LANGUAGES -->
+<!-- LOVE -->
 <div id="love" class="screen hidden">
-  <div class="card">
-    <h2>💌 50 tilda Sevgi</h2>
-    <p id="loveText">I love you</p>
-    <button onclick="nextFinal()">Davom etish 💫</button>
-  </div>
+<div class="card">
+<h2>💌 50 tilda sevgi</h2>
+<p id="loveText">I love you</p>
+<button onclick="final()">Davom etish 💖</button>
+</div>
 </div>
 
 <!-- FINAL -->
 <div id="final" class="screen hidden">
-  <div class="card">
-    <h1>💖 Sizga maxsus</h1>
-    <p>Bunyodbek tomonidan 💫</p>
-    <button onclick="showGratitude()">Minnatdorchilik 💌</button>
-  </div>
+<div class="card">
+<h1>💖 Yakun</h1>
+<p>Bunyodbek tomonidan</p>
+<button onclick="secret()">❤️ Secret</button>
+</div>
 </div>
 
-<!-- GRATITUDE -->
-<div id="gratitude" class="screen hidden">
-  <div class="card">
-    <h2>💌 Minnatdorchilik</h2>
-    <p>
-    Assalomu alaykum Madina<br>
-    Sizni hayotimda borligingiz uchun minnatdorman<br>
-    Siz menga ilhom berasiz<br>
-    Sizning tabassumingiz juda qadrlidir<br>
-    Sizning mavjudligingiz meni baxtli qiladi<br>
-    Men sizni hurmat qilaman<br>
-    Sizning yaxshi fazilatlaringiz ko‘p<br>
-    Siz bilan gaplashish yoqimli<br>
-    Siz menga kuch berasiz<br>
-    Sizning samimiyligingiz ajoyib<br>
-    Har doim yaxshilik tilayman<br>
-    Sizning qadriingiz men uchun katta<br>
-    Sizni doimo qadrlayman<br>
-    Sizga omad tilayman<br>
-    Rahmat sizga 💖
-    </p>
-  </div>
+<!-- SECRET -->
+<div id="secret" class="screen hidden">
+<div class="card">
+<h2>💌 Siz uchun</h2>
+<p>Madina, siz hayotimdagi eng chiroyli insonlardan birisiz 💖</p>
+<p>Har bir kuningiz baxtga to‘lsin ✨</p>
+</div>
 </div>
 
 <script>
-const correctPassword = "madina123";
-
-function checkPass(){
-  let p = document.getElementById('pass').value;
-  if(p === correctPassword){
-    document.getElementById('login').classList.add('hidden');
-    document.getElementById('intro').classList.remove('hidden');
-  } else {
-    alert("Noto'g'ri parol 😢");
-  }
+const pass="madina123";
+function check(){
+if(document.getElementById('pass').value===pass){
+document.getElementById('login').classList.add('hidden');
+document.getElementById('intro').classList.remove('hidden');
+type();
+}
 }
 
-function showLove(){
-  document.getElementById('intro').classList.add('hidden');
-  document.getElementById('love').classList.remove('hidden');
-  startLove();
-}
-
-let loves = [
-"I love you","Je t'aime","Te amo","Ich liebe dich","Ti amo",
-"Aishiteru","Seni sevaman","Volim te","Szeretlek","Ana behibek"
-];
+let text="Siz juda alohida insonsiz Madina... sizni hurmat qilaman va qadrlayman 💖";
 let i=0;
+function type(){
+if(i<text.length){
+document.getElementById('typing').innerHTML+=text[i];
+i++;setTimeout(type,60);
+}
+}
+
+function next(){
+document.getElementById('intro').classList.add('hidden');
+document.getElementById('love').classList.remove('hidden');
+startLove();
+}
+
+let loves=["I love you","Te amo","Je t'aime","Seni sevaman","Ich liebe dich","Ti amo"];
+let l=0;
 function startLove(){
-  setInterval(()=>{
-    document.getElementById('loveText').innerText = loves[i%loves.length];
-    i++;
-  },800);
+setInterval(()=>{
+document.getElementById('loveText').innerText=loves[l%loves.length];l++;
+},700);
 }
 
-function nextFinal(){
-  document.getElementById('love').classList.add('hidden');
-  document.getElementById('final').classList.remove('hidden');
+function final(){
+document.getElementById('love').classList.add('hidden');
+document.getElementById('final').classList.remove('hidden');
+playMusic();
 }
 
-function showGratitude(){
-  document.getElementById('final').classList.add('hidden');
-  document.getElementById('gratitude').classList.remove('hidden');
+function secret(){
+document.getElementById('final').classList.add('hidden');
+document.getElementById('secret').classList.remove('hidden');
 }
 
-// HEART ANIMATION
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function playMusic(){
+document.getElementById('music').play();
+}
 
-let hearts = [];
-for(let i=0;i<150;i++){
-  hearts.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    s:Math.random()*20+10,
-    sp:Math.random()*1+0.5
-  });
+// HEART PARTICLES
+const canvas=document.getElementById('canvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let hearts=[];
+for(let i=0;i<120;i++){
+hearts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,s:Math.random()*20+10,v:Math.random()*1+0.5});
 }
 
 function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  hearts.forEach(h=>{
-    ctx.font = h.s + "px Arial";
-    ctx.fillText("💖",h.x,h.y);
-    h.y -= h.sp;
-    if(h.y<-20){
-      h.y = canvas.height;
-      h.x = Math.random()*canvas.width;
-    }
-  });
-  requestAnimationFrame(draw);
+ctx.clearRect(0,0,canvas.width,canvas.height);
+hearts.forEach(h=>{
+ctx.font=h.s+"px Arial";
+ctx.fillText("💖",h.x,h.y);
+h.y-=h.v;
+if(h.y<-20){h.y=canvas.height;h.x=Math.random()*canvas.width;}
+});
+requestAnimationFrame(draw);
 }
 draw();
 </script>
 </body>
 </html>
-
