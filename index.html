@@ -1,229 +1,254 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Madina uchun 💖 | Premium Cinema</title>
+<meta charset="UTF-8">
+<title>For Madina 💖 ULTIMATE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-:root{
-  --text:#1a1a1a;
-  --card:rgba(255,255,255,0.55);
-  --accent:#ff3d7f;
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #ff4d6d, #ffb3c1, #ffd6e0);
+    overflow: hidden;
+    text-align: center;
+    color: white;
 }
 
-body{
-margin:0;
-font-family:Arial,sans-serif;
-overflow:hidden;
-text-align:center;
-color:var(--text);
-background:linear-gradient(120deg,#ffe6f0,#ffffff,#ffe6fa);
-background-size:400% 400%;
-animation:bg 12s infinite;
+/* LOGIN */
+#loginScreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #ff4d6d, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-@keyframes bg{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+#loginBox {
+    background: rgba(255,255,255,0.12);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(255,255,255,0.2);
 }
 
-canvas{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-z-index:0;
+input {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    text-align: center;
 }
 
-.screen{
-position:absolute;
-width:100%;height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:2;
-padding:10px;
+button {
+    margin-top: 10px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    background: white;
+    color: #ff4d6d;
+    transition: 0.3s;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
-.card{
-background:var(--card);
-backdrop-filter:blur(14px);
-padding:22px;
-border-radius:22px;
-max-width:92%;
-box-shadow:0 10px 35px rgba(0,0,0,0.15);
+button:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 30px white;
 }
 
-h1,h2{
-margin:10px 0;
+/* PAGES */
+.page {
+    display: none;
+    padding: 40px;
 }
 
-input,button{
-padding:12px;
-border-radius:12px;
-border:none;
-margin-top:10px;
-font-size:16px;
+.active {
+    display: block;
+    animation: fadeIn 1s ease-in-out;
 }
 
-button{
-cursor:pointer;
-background:var(--accent);
-color:white;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(255,61,127,0.3);
+h1 {
+    font-size: 52px;
+    text-shadow: 0 0 25px rgba(255,255,255,0.7);
 }
 
-button:hover{
-transform:scale(1.05);
+/* TEXT TYPE EFFECT */
+.typing {
+    font-size: 24px;
+    margin-top: 10px;
+    min-height: 30px;
 }
 
-.hidden{display:none;}
-
-.title{
-font-size:30px;
-animation:fade 2s ease;
+/* HEARTS */
+.heart {
+    position: absolute;
+    animation: fall linear infinite;
+    font-size: 18px;
 }
 
-@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes fall {
+    0% {transform: translateY(-10%); opacity: 1;}
+    100% {transform: translateY(110vh); opacity: 0;}
+}
+
+/* BACKGROUND EFFECT */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2), transparent);
+    animation: glowBg 6s infinite alternate;
+}
+
+@keyframes glowBg {
+    from {transform: scale(1);}
+    to {transform: scale(1.3);}
+}
+
+/* FINAL */
+.final {
+    background: radial-gradient(circle, #1a001f, #ff4d6d);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* MUSIC BUTTON */
+#musicBtn {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+}
 </style>
 </head>
+
 <body>
 
-<canvas id="canvas"></canvas>
+<!-- 🔐 LOGIN -->
+<div id="loginScreen">
+    <div id="loginBox">
+        <h2>🔐 Kirish</h2>
+        <input type="password" id="pass" placeholder="Parol">
+        <br>
+        <button onclick="checkPassword()">Kirish 💖</button>
+    </div>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <h1 id="typingText"></h1>
+    <div class="typing">💖 Siz uchun maxsus sayt</div>
+    <button onclick="showPage(2)">Ochish 💌</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+
+<h2>💖 Minatdorchilik 💖</h2>
+
+<p>🌹 Siz mening hayotimda borligingiz uchun minnatdorman</p>
+<p>🌹 Siz menga kuch va ilhom berasiz</p>
+<p>🌹 Siz bilan har kun yanada chiroyliroq</p>
+<p>🌹 Sizning tabassumingiz eng katta baxtim</p>
+<p>🌹 Siz bo‘lmasangiz dunyo bo‘shdek tuyuladi</p>
+<p>🌹 Men Sizning baxtli bo‘lishingizni xohlayman</p>
+<p>🌹 Siz mening eng qadrli insonimsiz</p>
+<p>🌹 Siz borligingiz uchun rahmat</p>
+
+<p style="margin-top:15px;">
+❤️ I love you | Je t’aime | Te amo | Ich liebe dich | Seni sevaman ❤️
+</p>
+
+<button onclick="showPage(1)">🔙</button>
+<button onclick="showPage(3)">➡️</button>
+
+</div>
+
+<!-- PAGE 3 -->
+<div class="page final" id="page3">
+<h1>💖 BUNYODBEK & MADINA 💖</h1>
+<p>Sevgingiz abadiy bo‘lsin 💞</p>
+<button onclick="showPage(1)">🔙</button>
+</div>
 
 <!-- MUSIC -->
 <audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/10/16/audio_12b6b1.mp3" type="audio/mp3">
+<source src="https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b1d0f7.mp3" type="audio/mp3">
 </audio>
 
-<!-- LOGIN -->
-<div id="login" class="screen">
-<div class="card">
-<h2>🔒 Parolni kiriting</h2>
-<input id="pass" type="password" placeholder="Parol..." />
-<br>
-<button onclick="check()">Kirish</button>
-</div>
-</div>
-
-<!-- INTRO -->
-<div id="intro" class="screen hidden">
-<div class="card">
-<h1 class="title">🌸 Madina uchun 💖</h1>
-<p id="typing"></p>
-<button onclick="next()">Davom etish 💫</button>
-</div>
-</div>
-
-<!-- LOVE -->
-<div id="love" class="screen hidden">
-<div class="card">
-<h2>💌 Sevgi tillari</h2>
-<p id="loveText">I love you</p>
-<button onclick="final()">Davom etish 💖</button>
-</div>
-</div>
-
-<!-- FINAL -->
-<div id="final" class="screen hidden">
-<div class="card">
-<h1>💖 Yakun</h1>
-<p>Bunyodbek tomonidan ✨</p>
-<button onclick="secret()">❤️ Secret</button>
-</div>
-</div>
-
-<!-- SECRET -->
-<div id="secret" class="screen hidden">
-<div class="card">
-<h2>💌 Maxsus xabar</h2>
-<p>
-Madina, siz mening hayotimda juda muhim insonsiz 💖<br><br>
-Sizning kulishingiz menga baxt beradi ✨<br>
-Siz bilan har bir kun qadrli 🌸<br>
-Sizni doimo hurmat qilaman 💫<br>
-Sizning yaxshi qalbingiz juda noyob 💖<br>
-Sizga har doim omad tilayman 🌷<br>
-Rahmat siz borligingiz uchun 💌
-</p>
-</div>
-</div>
+<button id="musicBtn" onclick="toggleMusic()">🎵 Music</button>
 
 <script>
-const pass="madina123";
 
-function check(){
-if(document.getElementById('pass').value===pass){
-document.getElementById('login').classList.add('hidden');
-document.getElementById('intro').classList.remove('hidden');
-type();
-}
-}
+const password = "Madina1117";
 
-let text="Siz juda alohida insonsiz Madina... Sizni hurmat qilaman va qadrlayman 💖";
-let i=0;
-function type(){
-if(i<text.length){
-document.getElementById('typing').innerHTML+=text[i];
-i++;setTimeout(type,50);
-}
+/* LOGIN */
+function checkPassword() {
+    let val = document.getElementById("pass").value;
+    if(val === password) {
+        document.getElementById("loginScreen").style.display = "none";
+        startEffects();
+        typeText();
+    } else {
+        alert("❌ Parol noto‘g‘ri!");
+    }
 }
 
-function next(){
-document.getElementById('intro').classList.add('hidden');
-document.getElementById('love').classList.remove('hidden');
-startLove();
-playMusic();
+/* PAGE SWITCH */
+function showPage(num) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page' + num).classList.add('active');
 }
 
-let loves=["I love you","Te amo","Je t'aime","Seni sevaman","Ich liebe dich","Ti amo","Aishiteru","Volim te"];
-let l=0;
-function startLove(){
-setInterval(()=>{
-document.getElementById('loveText').innerText=loves[l%loves.length];l++;
-},700);
+/* HEARTS */
+function createHeart() {
+    const el = document.createElement("div");
+    el.classList.add("heart");
+    el.innerHTML = Math.random() > 0.5 ? "❤️" : "🌸";
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDuration = (3 + Math.random() * 5) + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 7000);
 }
 
-function final(){
-document.getElementById('love').classList.add('hidden');
-document.getElementById('final').classList.remove('hidden');
+/* EFFECTS START */
+function startEffects() {
+    setInterval(createHeart, 150);
 }
 
-function secret(){
-document.getElementById('final').classList.add('hidden');
-document.getElementById('secret').classList.remove('hidden');
+/* MUSIC */
+function toggleMusic() {
+    let music = document.getElementById("music");
+    if(music.paused) music.play();
+    else music.pause();
 }
 
-function playMusic(){
-let m=document.getElementById('music');
-m.volume=0.25;
-m.play();
+/* TYPE EFFECT */
+let text = "Salom Madina 💖";
+let i = 0;
+function typeText() {
+    let el = document.getElementById("typingText");
+    let interval = setInterval(() => {
+        if(i < text.length) {
+            el.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 120);
 }
 
-// HEART ANIMATION
-const canvas=document.getElementById('canvas');
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let hearts=[];
-for(let i=0;i<140;i++){
-hearts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,s:Math.random()*18+8,v:Math.random()*1+0.3});
-}
-
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-hearts.forEach(h=>{
-ctx.font=h.s+"px Arial";
-ctx.fillText("💖",h.x,h.y);
-h.y-=h.v;
-if(h.y<-20){h.y=canvas.height;h.x=Math.random()*canvas.width;}
-});
-requestAnimationFrame(draw);
-}
-draw();
 </script>
+
 </body>
 </html>
