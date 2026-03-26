@@ -1,70 +1,114 @@
-
 <!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Madina uchun 💖 | Cinema Pro Max</title>
+<title>Madina uchun 💖 | Premium Cinema</title>
 <style>
+:root{
+  --text:#1a1a1a;
+  --card:rgba(255,255,255,0.55);
+  --accent:#ff3d7f;
+}
+
 body{
 margin:0;
 font-family:Arial,sans-serif;
 overflow:hidden;
-color:white;
 text-align:center;
-background:linear-gradient(120deg,#000,#1a0025,#000);
+color:var(--text);
+background:linear-gradient(120deg,#ffe6f0,#ffffff,#ffe6fa);
 background-size:400% 400%;
-animation:bg 10s infinite;
+animation:bg 12s infinite;
 }
+
 @keyframes bg{
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
+
 canvas{
-position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+z-index:0;
 }
+
 .screen{
-position:absolute;width:100%;height:100%;display:flex;
-justify-content:center;align-items:center;flex-direction:column;
+position:absolute;
+width:100%;height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 z-index:2;
+padding:10px;
 }
+
 .card{
-background:rgba(255,255,255,0.08);
-padding:22px;border-radius:20px;
-backdrop-filter:blur(12px);
-max-width:90%;box-shadow:0 0 25px rgba(255,0,100,0.3);
+background:var(--card);
+backdrop-filter:blur(14px);
+padding:22px;
+border-radius:22px;
+max-width:92%;
+box-shadow:0 10px 35px rgba(0,0,0,0.15);
 }
+
+h1,h2{
+margin:10px 0;
+}
+
 input,button{
-padding:10px;border-radius:12px;border:none;margin-top:10px;
+padding:12px;
+border-radius:12px;
+border:none;
+margin-top:10px;
+font-size:16px;
 }
-button{cursor:pointer;background:#ff3d7f;color:white;font-weight:bold}
+
+button{
+cursor:pointer;
+background:var(--accent);
+color:white;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(255,61,127,0.3);
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
 .hidden{display:none;}
+
 .title{
-font-size:28px;
-animation:fade 2s ease-in-out;
+font-size:30px;
+animation:fade 2s ease;
 }
+
 @keyframes fade{from{opacity:0}to{opacity:1}}
 </style>
 </head>
 <body>
 
 <canvas id="canvas"></canvas>
+
+<!-- MUSIC -->
 <audio id="music" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+<source src="https://cdn.pixabay.com/download/audio/2022/10/16/audio_12b6b1.mp3" type="audio/mp3">
 </audio>
 
 <!-- LOGIN -->
 <div id="login" class="screen">
 <div class="card">
-<h2>🔒 Parol</h2>
+<h2>🔒 Parolni kiriting</h2>
 <input id="pass" type="password" placeholder="Parol..." />
 <br>
 <button onclick="check()">Kirish</button>
 </div>
 </div>
 
-<!-- CINEMATIC INTRO -->
+<!-- INTRO -->
 <div id="intro" class="screen hidden">
 <div class="card">
 <h1 class="title">🌸 Madina uchun 💖</h1>
@@ -76,7 +120,7 @@ animation:fade 2s ease-in-out;
 <!-- LOVE -->
 <div id="love" class="screen hidden">
 <div class="card">
-<h2>💌 50 tilda sevgi</h2>
+<h2>💌 Sevgi tillari</h2>
 <p id="loveText">I love you</p>
 <button onclick="final()">Davom etish 💖</button>
 </div>
@@ -86,7 +130,7 @@ animation:fade 2s ease-in-out;
 <div id="final" class="screen hidden">
 <div class="card">
 <h1>💖 Yakun</h1>
-<p>Bunyodbek tomonidan</p>
+<p>Bunyodbek tomonidan ✨</p>
 <button onclick="secret()">❤️ Secret</button>
 </div>
 </div>
@@ -94,14 +138,22 @@ animation:fade 2s ease-in-out;
 <!-- SECRET -->
 <div id="secret" class="screen hidden">
 <div class="card">
-<h2>💌 Siz uchun</h2>
-<p>Madina, siz hayotimdagi eng chiroyli insonlardan birisiz 💖</p>
-<p>Har bir kuningiz baxtga to‘lsin ✨</p>
+<h2>💌 Maxsus xabar</h2>
+<p>
+Madina, siz mening hayotimda juda muhim insonsiz 💖<br><br>
+Sizning kulishingiz menga baxt beradi ✨<br>
+Siz bilan har bir kun qadrli 🌸<br>
+Sizni doimo hurmat qilaman 💫<br>
+Sizning yaxshi qalbingiz juda noyob 💖<br>
+Sizga har doim omad tilayman 🌷<br>
+Rahmat siz borligingiz uchun 💌
+</p>
 </div>
 </div>
 
 <script>
 const pass="madina123";
+
 function check(){
 if(document.getElementById('pass').value===pass){
 document.getElementById('login').classList.add('hidden');
@@ -110,12 +162,12 @@ type();
 }
 }
 
-let text="Siz juda alohida insonsiz Madina... sizni hurmat qilaman va qadrlayman 💖";
+let text="Siz juda alohida insonsiz Madina... Sizni hurmat qilaman va qadrlayman 💖";
 let i=0;
 function type(){
 if(i<text.length){
 document.getElementById('typing').innerHTML+=text[i];
-i++;setTimeout(type,60);
+i++;setTimeout(type,50);
 }
 }
 
@@ -123,9 +175,10 @@ function next(){
 document.getElementById('intro').classList.add('hidden');
 document.getElementById('love').classList.remove('hidden');
 startLove();
+playMusic();
 }
 
-let loves=["I love you","Te amo","Je t'aime","Seni sevaman","Ich liebe dich","Ti amo"];
+let loves=["I love you","Te amo","Je t'aime","Seni sevaman","Ich liebe dich","Ti amo","Aishiteru","Volim te"];
 let l=0;
 function startLove(){
 setInterval(()=>{
@@ -136,7 +189,6 @@ document.getElementById('loveText').innerText=loves[l%loves.length];l++;
 function final(){
 document.getElementById('love').classList.add('hidden');
 document.getElementById('final').classList.remove('hidden');
-playMusic();
 }
 
 function secret(){
@@ -145,18 +197,20 @@ document.getElementById('secret').classList.remove('hidden');
 }
 
 function playMusic(){
-document.getElementById('music').play();
+let m=document.getElementById('music');
+m.volume=0.25;
+m.play();
 }
 
-// HEART PARTICLES
+// HEART ANIMATION
 const canvas=document.getElementById('canvas');
 const ctx=canvas.getContext('2d');
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let hearts=[];
-for(let i=0;i<120;i++){
-hearts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,s:Math.random()*20+10,v:Math.random()*1+0.5});
+for(let i=0;i<140;i++){
+hearts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,s:Math.random()*18+8,v:Math.random()*1+0.3});
 }
 
 function draw(){
